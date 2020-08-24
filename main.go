@@ -9,7 +9,7 @@ import (
 func main() {
 	err := godotenv.Load("./auth.env")
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading auth.env file")
 	}
 
 	a := App{}

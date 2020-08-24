@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"testing"
@@ -8,11 +9,16 @@ import (
 
 var a App
 
-
 func TestMain(m *testing.M) {
+	err := godotenv.Load("./auth.env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	a.Initialize(
 		os.Getenv("APP_DB_USERNAME"), // environment variables
 		os.Getenv("APP_DB_PASSWORD"),
+		os.Getenv("APP_DB_SERVER"),
 		os.Getenv("APP_DB_NAME"))
 
 	ensureTableExists()
@@ -31,7 +37,6 @@ func clearTable() {
 	a.DB.Exec("DELETE FROM products")
 	a.DB.Exec("ALTER SEQUENCE products_id_seq RESTART WITH 1")
 }
-
 
 const tableCreationQuery = `CREATE TABLE IF NOT EXISTS products
 (

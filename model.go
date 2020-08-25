@@ -21,13 +21,38 @@ func (p *product) updateProduct(db *sql.DB) error {
 }
 
 func (p *product) deleteProduct(db *sql.DB) error {
-	return errors.New("not implemented")
+	_, err := db.Exec("DELETE FROM products WHERE id=$1", p.ID)
+	return err
 }
 
 func (p *product) createProduct(db *sql.DB) error {
-	return errors.New("not implemented")
+	err := db.QueryRow("INSERT INTO products(name, price) VALUES($1, $2) RETURNING id", p.Name, p.Price).Scan(&p.ID)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func getProducts(db *sql.DB, start, count int) ([]product, error) {
-	return nil, errors.New("not implemented")
+	rows, err := db.Query("SELECT id, name,  price FROM products LIMIT $1 OFFSET $2", count, start)
+
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+
+	products := []product{}
+
+	for rows.Next() {
+		var p product
+		if err := rows.Scan(&p.ID, &p.Name, &p.Price); err != nil {
+			return nil, err
+		}
+		products = append(products, p)
+	}
+
+	return products, nil
 }

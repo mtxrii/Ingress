@@ -49,4 +49,4 @@ web: ingress
 ingress
 ```
 
-Then follow instructions on [Heroku](https://devcenter.heroku.com/articles/git)
+Put these files, as well as your `auth.env`, in your working directory, then follow instructions on [Heroku](https://devcenter.heroku.com/articles/git)

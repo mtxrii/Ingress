@@ -32,6 +32,7 @@ APP_DB_NAME=database name (probably same as username)
 
 APP_KEY=key for verifying frontend interaction (you make this up)
 ```
+The secret key is up to you. Its purpose is to restrict access to your database to only your frontend. So that only your application can use this backend to access your database.
 
 ### If running locally...
 

@@ -1,5 +1,5 @@
 # Ingress
-A sample product hub backend for use with a PostgreSQL database and a visual product hub frontend static site.
+A sample product hub backend for use with a PostgreSQL database and a visual display recipient of REST API calls
 
 This app was designed specifically for use with sister project [Mingress](https://github.com/mtxrii/Mingress).
 
